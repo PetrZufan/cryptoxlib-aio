@@ -206,24 +206,3 @@ class BitstampPrivateTradesSubscription(BitstampSubscription):
 
     def get_unsubscription_message(self, **kwargs) -> dict:
         return {"channel": f"private-my_trades_{self.pair_str}"}
-
-
-if __name__ == "__main__":
-    from cryptoxlib.version_conversions import async_run
-    from cryptoxlib.CryptoXLib import CryptoXLib
-
-    async def callback(response: dict) -> None:
-        print(f"{response}")
-
-    async def run():
-        api_key = "api key"
-        sec_key = b"api secret key"
-
-        client = CryptoXLib.create_bitstamp_client(api_key, sec_key)
-        client.compose_subscriptions([
-            BitstampTradesSubscription("LTC", "EUR", callbacks=[callback]),
-            BitstampOrdersSubscription("LTC", "EUR", callbacks=[callback]),
-        ])
-        await client.start_websockets()
-
-    async_run(run())

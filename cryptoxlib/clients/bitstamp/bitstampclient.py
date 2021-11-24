@@ -493,33 +493,3 @@ class BitstampClient(CryptoXLibClient):
 
     async def get_websocket_token(self) -> dict:
         return await self._create_post("websockets_token/", signed=True, content_type=ContentType.URL_ENCODED)
-
-
-if __name__ == "__main__":
-    from cryptoxlib.CryptoXLib import CryptoXLib
-    from cryptoxlib.version_conversions import async_run
-
-    async def run():
-        api_key = "api key"
-        sec_key = b"api secret key"
-        client = CryptoXLib.create_bitstamp_client(api_key, sec_key)
-
-        # public api
-        print("order book:")
-        try:
-            response = await client.get_order_book("btc", "eur", Group.ZERO)
-            print(response)
-        except BitstampException as e:
-            print(e)
-
-        # private api
-        print("Account balance:")
-        try:
-            response = await client.get_balances()
-            print(response)
-        except BitstampException as e:
-            print(e)
-
-        await client.close()
-
-    async_run(run())
