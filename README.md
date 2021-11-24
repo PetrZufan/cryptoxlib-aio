@@ -15,6 +15,7 @@
 - `binance` leveraged token endpoints
 - `binance` COIN-M futures endpoints
 - `binance` margin and USDS-M futures endpoints
+- `bistamp` REST and WEBSOCKET API added.
 
 For the full history of changes see [CHANGELOG](https://github.com/nardew/cryptoxlib-aio/blob/master/CHANGELOG.md).
 
@@ -60,6 +61,7 @@ As mentioned earlier, all exchanges listed below include full support for websoc
 | ![eterbase](https://user-images.githubusercontent.com/1294454/82067900-faeb0f80-96d9-11ea-9f22-0071cfcb9871.jpg) | Eterbase | [API](https://developers.eterbase.exchange) |
 | ![hitbtc](https://user-images.githubusercontent.com/1294454/27766555-8eaec20e-5edc-11e7-9c5b-6dc69fc42f5e.jpg) | HitBTC | [API](https://api.hitbtc.com) |
 | ![liquid](https://user-images.githubusercontent.com/1294454/45798859-1a872600-bcb4-11e8-8746-69291ce87b04.jpg) | Liquid | [API](https://developers.liquid.com) |
+| ![bitstamp]() | Bitstamp | [API](https://www.bitstamp.net/api/) |
 
 Unlike REST API which is rather uniform across crypto exchanges websockets are often very exchange-specific and hence very time consuming to implement (which is the reason why they are not offered so broadly). Therefore `cryptoxlib-aio` comes at the cost of the number of exchanges it covers. This is in line with our ideology quality over quantity.
 
