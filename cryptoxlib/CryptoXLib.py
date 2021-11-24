@@ -1,4 +1,5 @@
 from cryptoxlib.clients.bitforex.BitforexClient import BitforexClient
+from cryptoxlib.clients.bitstamp.bitstampclient import BitstampClient
 from cryptoxlib.clients.liquid.LiquidClient import LiquidClient
 from cryptoxlib.clients.bibox.BiboxClient import BiboxClient
 from cryptoxlib.clients.bibox_europe.BiboxEuropeClient import BiboxEuropeClient
@@ -84,3 +85,7 @@ class CryptoXLib(object):
     @staticmethod
     def create_coinmate_client(user_id: str, api_key: str, sec_key: str) -> CoinmateClient:
         return CoinmateClient(user_id, api_key, sec_key)
+
+    @staticmethod
+    def create_bitstamp_client(api_key: str, sec_key: bytes) -> BitstampClient:
+        return BitstampClient(api_key, sec_key)

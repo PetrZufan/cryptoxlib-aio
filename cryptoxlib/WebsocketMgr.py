@@ -202,6 +202,9 @@ class Subscription(ABC):
     def get_subscription_message(self, **kwargs) -> dict:
         pass
 
+    def get_unsubscription_message(self, **kwargs) -> dict:
+        pass
+
     def get_internal_subscription_id(self) -> int:
         return self.internal_subscription_id
 
@@ -316,8 +319,22 @@ class WebsocketMgr(ABC):
     async def send_unsubscription_message(self, subscriptions: List[Subscription]):
         raise CryptoXLibException("The client does not support unsubscription messages.")
 
+    async def unsubscribe_all(self):
+        subscriptions = self.subscriptions
+        self.subscriptions = []
+        await self.send_unsubscription_message(subscriptions)
+
     async def send_authentication_message(self):
         pass
+
+    async def reconnect(self):
+        if self.websocket is not None:
+            LOG.debug(f"[{self.id}] Reconnecting websocket.")
+            if await self.websocket.is_open():
+                LOG.debug(f"[{self.id}] Reconnection: Closing websocket.")
+                await self.websocket.close()
+            LOG.debug(f"[{self.id}] Reconnection: Connecting websocket.")
+            await self.websocket.connect()
 
     async def main_loop(self):
         await self.send_authentication_message()
